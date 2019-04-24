@@ -46,6 +46,15 @@ tpm2_totp_SOURCES = src/tpm2-totp.c
 tpm2_totp_LDADD = $(AM_LDADD) libtpm2-totp.la
 tpm2_totp_LDFLAGS = $(AM_LDFLAGS)
 
+if GTK
+bin_PROGRAMS += gtpm2-totp
+
+gtpm2_totp_SOURCES = src/gtpm2-totp.c src/gtpm2-totp.ui
+gtpm2_totp_CFLAGS = $(AM_CFLAGS) $(GTK_CFLAGS)
+gtpm2_totp_LDADD = $(AM_LDADD) $(GTK_LIBS) libtpm2-totp.la
+gtpm2_totp_LDFLAGS = $(AM_LDFLAGS) $(GTK_LDFLAGS)
+endif #GTK
+
 ### Tests ###
 TESTS =
 

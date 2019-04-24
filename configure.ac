@@ -88,10 +88,19 @@ AC_ARG_ENABLE([integration],
 AM_CONDITIONAL([INTEGRATION], [test "x$enable_integration" != xno])
 AS_IF([test "x$enable_integration" != xno], [PKG_CHECK_MODULES([OATH],[liboath])])
 
+AC_ARG_ENABLE([gtk],
+              [AS_HELP_STRING([--disable-gtk], [build gtk application])],,
+              [enable_gtk=yes])
+AM_CONDITIONAL([GTK], [test "x$enable_gtk" = "xyes"])
+AS_IF([test "x$enable_gtk" = "xyes"],
+      [PKG_CHECK_MODULES(GTK, [gio-2.0 >= 2.50 gtk+-3.0 >= 3.22])])
+
+
 AC_OUTPUT
 
 AC_MSG_RESULT([
 $PACKAGE_NAME $VERSION
-    man-pages:  $PANDOC
+    man-pages:       $PANDOC
+    gtpm2-tss (gtk): $enable_gtk
 ])
     
